@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="מָגֵן — בדיקת חשיפת סיסמאות ואימיילים בדליפות מידע, בפרטיות מלאה (k-anonymity)." />
+  <title>מָגֵן · ניטור דליפות פרטיות־מתכנונו</title>
+  <link rel="stylesheet" href="/styles.css" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Ctext y='20' font-size='20'%3E%F0%9F%9B%A1%EF%B8%8F%3C/text%3E%3C/svg%3E" />
+</head>
+<body>
+  <a class="skip-link" href="#main">דלג לתוכן הראשי</a>
+
+  <header class="site-header">
+    <div class="wrap">
+      <h1 class="brand"><span aria-hidden="true">🛡️</span> מָגֵן</h1>
+      <p class="tagline">בדיקת חשיפה בדליפות מידע — הסיסמה שלך לעולם לא עוזבת את הדפדפן.</p>
+    </div>
+  </header>
+
+  <main id="main" class="wrap">
+
+    <section class="card" aria-labelledby="pw-title">
+      <h2 id="pw-title">בדיקת סיסמה</h2>
+      <p class="muted">
+        הבדיקה מתבצעת בשיטת <strong>k-anonymity</strong>: הדפדפן מחשב טביעת אצבע (SHA-1) של הסיסמה
+        ושולח לשרת רק 5 תווים ממנה. הסיסמה המלאה נשארת אצלך.
+      </p>
+      <form id="pw-form" novalidate>
+        <div class="field">
+          <label for="pw-input">סיסמה לבדיקה</label>
+          <div class="pw-row">
+            <input id="pw-input" name="password" type="password" autocomplete="off"
+                   autocapitalize="off" spellcheck="false" required
+                   aria-describedby="pw-help" />
+            <button type="button" id="pw-toggle" class="btn-secondary" aria-pressed="false">
+              הצג
+            </button>
+          </div>
+          <p id="pw-help" class="muted small">איננו שומרים, מתעדים או שולחים את הסיסמה המלאה לשום מקום.</p>
+        </div>
+        <button type="submit" class="btn-primary" id="pw-submit">בדוק סיסמה</button>
+      </form>
+      <div id="pw-result" class="result" role="status" aria-live="polite"></div>
+    </section>
+
+    <section class="card" aria-labelledby="em-title">
+      <h2 id="em-title">בדיקת אימייל</h2>
+      <p class="muted">בדיקה אם כתובת האימייל הופיעה בדליפות מידע ידועות, דרך ספק מודיעין מורשה.</p>
+      <form id="em-form" novalidate>
+        <div class="field">
+          <label for="em-input">כתובת אימייל</label>
+          <input id="em-input" name="email" type="email" inputmode="email"
+                 autocomplete="off" required aria-describedby="em-help" />
+          <p id="em-help" class="muted small">ההודעות אחידות בכוונה — איננו חושפים אם כתובת "קיימת" אצלנו.</p>
+        </div>
+        <button type="submit" class="btn-primary" id="em-submit">בדוק אימייל</button>
+      </form>
+      <div id="em-result" class="result" role="status" aria-live="polite"></div>
+    </section>
+
+    <section class="card info" aria-labelledby="protect-title">
+      <h2 id="protect-title">אם משהו נחשף — כך מתגוננים</h2>
+      <ol class="steps">
+        <li>החליפו מיד את הסיסמה בכל שירות שבו השתמשתם בה, והשתמשו בסיסמה ייחודית לכל אתר.</li>
+        <li>הפעילו אימות דו-שלבי (MFA) בכל חשבון שתומך בכך.</li>
+        <li>השתמשו במנהל סיסמאות ליצירת סיסמאות חזקות וייחודיות.</li>
+        <li>אם נחשפו פרטי תשלום — פנו לבנק/חברת האשראי להקפאה או החלפת כרטיס.</li>
+      </ol>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <p class="muted small">
+        מָגֵן אינו אוסף, רוכש או מאחסן מידע גנוב, ואינו שומר מספרי כרטיסי אשראי.
+        הבדיקות מתבצעות מול מקורות מודיעין מורשים.
+      </p>
+      <p class="muted small" id="provider-note"></p>
+    </div>
+  </footer>
+
+  <script src="/app.js" type="module"></script>
+</body>
+</html>
