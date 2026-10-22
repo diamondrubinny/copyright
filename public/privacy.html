@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="מדיניות פרטיות — מָגֵן." />
+  <title>מדיניות פרטיות · מָגֵן</title>
+  <link rel="stylesheet" href="/styles.css" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Ctext y='20' font-size='20'%3E%F0%9F%9B%A1%EF%B8%8F%3C/text%3E%3C/svg%3E" />
+</head>
+<body>
+  <a class="skip-link" href="#main">דלג לתוכן הראשי</a>
+
+  <header class="site-header">
+    <div class="wrap">
+      <h1 class="brand"><a href="/" style="color:inherit;text-decoration:none"><span aria-hidden="true">🛡️</span> מָגֵן</a></h1>
+      <p class="tagline">מדיניות פרטיות</p>
+    </div>
+  </header>
+
+  <main id="main" class="wrap">
+    <article class="card page">
+      <div class="draft-banner">⚠️ <strong>טיוטה טכנית.</strong> מסמך זה דורש בדיקה ואישור מקצועי (עו"ד / ממונה פרטיות / יועץ נגישות) לפני פרסום סופי. אינו ייעוץ משפטי.</div>
+      <h1>מדיניות פרטיות</h1>
+      <p class="updated">עדכון אחרון: 22.10.2026</p>
+
+      <h2>1. מי אנחנו</h2>
+      <p>מָגֵן הוא שירות לבדיקת חשיפת סיסמאות ואימיילים בדליפות מידע ידועות. בגרסת ה-MVP השירות חסר מצב (stateless) ואינו מנהל חשבונות משתמש.</p>
+
+      <h2>2. עיקרון מנחה: מינימיזציה</h2>
+      <ul>
+        <li><strong>בדיקת סיסמה:</strong> הסיסמה מעובדת כולה בדפדפן שלך. נשלחים לשרת רק 5 התווים הראשונים של טביעת אצבע (SHA-1) — שיטת k-anonymity. איננו מקבלים, רואים, שומרים או מתעדים את הסיסמה או את טביעת האצבע המלאה.</li>
+        <li><strong>בדיקת אימייל:</strong> כתובת האימייל נשלחת לשרת לצורך הבדיקה מול ספק מודיעין דליפות, ואינה נשמרת לאחר מכן.</li>
+      </ul>
+
+      <h2>3. מה איננו עושים</h2>
+      <ul>
+        <li>איננו אוספים, רוכשים או מאחסנים מידע גנוב.</li>
+        <li>איננו שומרים מספרי כרטיסי אשראי.</li>
+        <li>איננו מפעילים עוגיות שיווק/אנליטיקה או כלי מעקב.</li>
+        <li>איננו מוכרים מידע לצד שלישי.</li>
+      </ul>
+
+      <h2>4. ספקי צד שלישי</h2>
+      <ul>
+        <li><strong>Pwned Passwords Range API</strong> — מקבל prefix בן 5 תווים בלבד (לא ניתן לשחזר ממנו סיסמה).</li>
+        <li><strong>ספק בדיקת אימייל</strong> (למשל HIBP) — בעת בדיקת אימייל נשלחת אליו הכתובת. דורש DPA לפני שימוש מסחרי.</li>
+      </ul>
+
+      <h2>5. בסיס חוקי וזכויותיך</h2>
+      <p>העיבוד מתבצע לבקשתך היזומה. בהתאם לחוק הגנת הפרטיות (ישראל) ול-GDPR (אם חל) עומדות לך זכויות גישה, תיקון, מחיקה, התנגדות, ייצוא ומשיכת הסכמה. מאחר שאיננו שומרים מידע ב-MVP, אין לנו רשומות למחוק.</p>
+
+      <h2>6. אבטחת מידע</h2>
+      <p>HTTPS בלבד, כותרות אבטחה מחמירות, ואין תיעוד (לוג) של מידע רגיש.</p>
+
+      <h2>7. יצירת קשר</h2>
+      <p>[פרטי קשר וממונה פרטיות — להשלמה לפני פרסום.]</p>
+    </article>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <nav class="footer-nav" aria-label="קישורי מדיניות ונגישות">
+        <ul>
+        <li><a href="/">דף הבית</a></li>
+        <li><a href="/privacy.html" aria-current="page">מדיניות פרטיות</a></li>
+        <li><a href="/terms.html">תנאי שימוש</a></li>
+        <li><a href="/cookies.html">מדיניות עוגיות</a></li>
+        <li><a href="/accessibility.html">הצהרת נגישות</a></li>
+        </ul>
+      </nav>
+      <p class="muted small">מָגֵן אינו אוסף, רוכש או מאחסן מידע גנוב, ואינו שומר מספרי כרטיסי אשראי.</p>
+    </div>
+  </footer>
+</body>
+</html>

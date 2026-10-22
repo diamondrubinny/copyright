@@ -1,0 +1,5 @@
+# Magen security contact (RFC 9116). Draft — replace placeholders before production.
+Contact: mailto:security@example.com
+Preferred-Languages: he, en
+Canonical: /.well-known/security.txt
+# Expires: set a real future date (ISO 8601) before production, e.g. 2027-12-31T23:59:59Z
