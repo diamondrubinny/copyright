@@ -10,5 +10,9 @@
     "dev": "node --experimental-strip-types --watch src/server.ts",
     "typecheck": "tsc --noEmit"
   },
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "@types/node": "22.10.2",
+    "typescript": "5.7.2"
+  }
 }

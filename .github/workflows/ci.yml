@@ -1,0 +1,36 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    name: Integration tests
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22.x"
+      # No external runtime deps: the app and tests run on Node's native
+      # TypeScript type-stripping, so there is nothing to install to run them.
+      - name: Run integration tests
+        run: node --experimental-strip-types scripts/test.ts
+
+  typecheck:
+    name: Type check
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22.x"
+      - name: Install dev dependencies
+        run: npm install --no-audit --no-fund
+      - name: Type check
+        run: npm run typecheck
