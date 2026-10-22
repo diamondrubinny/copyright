@@ -136,3 +136,31 @@ a:focus-visible {
   .pw-row { flex-direction: column; }
   .btn-secondary { width: 100%; }
 }
+
+/* --- Content pages (legal / accessibility) --- */
+.page { max-width: 720px; }
+.page h1 { font-size: 1.7rem; margin: 0 0 6px; }
+.page h2 { font-size: 1.25rem; margin: 26px 0 8px; }
+.page h3 { font-size: 1.05rem; margin: 18px 0 6px; color: var(--muted); }
+.page p, .page li { color: var(--text); }
+.page ul, .page ol { padding-inline-start: 22px; }
+.page a { color: var(--brand); }
+.page table { border-collapse: collapse; width: 100%; margin: 12px 0; }
+.page th, .page td { border: 1px solid var(--border); padding: 8px 10px; text-align: start; }
+.page th { background: var(--surface-2); }
+
+.draft-banner {
+  background: rgba(255,176,32,0.12);
+  border: 1px solid var(--warn);
+  border-radius: 10px;
+  padding: 12px 14px;
+  margin: 16px 0 8px;
+}
+.updated { color: var(--muted); font-size: 0.875rem; }
+
+/* --- Footer navigation (permanent) --- */
+.footer-nav { margin: 0 0 14px; }
+.footer-nav ul { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 8px 18px; }
+.footer-nav a { color: var(--text); text-decoration: underline; }
+.footer-nav a:hover { color: var(--brand); }
+.footer-nav a[aria-current="page"] { color: var(--brand); font-weight: 600; }

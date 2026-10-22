@@ -90,5 +90,19 @@ await new Promise((r) => setTimeout(r, 400));
   ok("path traversal not leaking package.json", r.status === 404 || r.status === 403, `status=${r.status}`);
 }
 
+// content pages (legal / accessibility) + permanent footer nav
+{
+  const pages = ["/privacy.html", "/terms.html", "/cookies.html", "/accessibility.html"];
+  for (const path of pages) {
+    const r = await fetch(`${BASE}${path}`);
+    const html = await r.text();
+    ok(`${path} served 200`, r.status === 200, `status=${r.status}`);
+    ok(`${path} has footer nav to accessibility`, html.includes('href="/accessibility.html"'));
+    ok(`${path} has strict CSP`, (r.headers.get("content-security-policy") ?? "").includes("default-src 'self'"));
+  }
+  const home = await (await fetch(`${BASE}/`)).text();
+  ok("home footer links to privacy page", home.includes('href="/privacy.html"'));
+}
+
 console.log(`\nRESULT: ${pass} passed, ${fail} failed`);
 process.exit(fail === 0 ? 0 : 1);
