@@ -1,7 +1,7 @@
 import { createServer, type IncomingMessage, type ServerResponse } from "node:http";
 import { readFile } from "node:fs/promises";
 import { fileURLToPath } from "node:url";
-import { dirname, join, normalize, extname } from "node:path";
+import { dirname, join, normalize, extname, sep } from "node:path";
 import { config } from "./config.ts";
 import { applySecurityHeaders } from "./lib/securityHeaders.ts";
 import { RateLimiter } from "./lib/rateLimit.ts";
@@ -22,6 +22,9 @@ const MIME: Record<string, string> = {
   ".js": "text/javascript; charset=utf-8",
   ".svg": "image/svg+xml",
   ".ico": "image/x-icon",
+  ".txt": "text/plain; charset=utf-8",
+  ".xml": "application/xml; charset=utf-8",
+  ".json": "application/json; charset=utf-8",
 };
 
 function clientIp(req: IncomingMessage): string {
@@ -72,7 +75,7 @@ async function serveStatic(req: IncomingMessage, res: ServerResponse, urlPath: s
   const rel = urlPath === "/" ? "/index.html" : urlPath;
   // Prevent path traversal: normalize and ensure it stays within PUBLIC_DIR.
   const filePath = normalize(join(PUBLIC_DIR, rel));
-  if (!filePath.startsWith(PUBLIC_DIR)) {
+  if (filePath !== PUBLIC_DIR && !filePath.startsWith(PUBLIC_DIR + sep)) {
     sendJson(res, 403, { error: "forbidden" });
     return;
   }

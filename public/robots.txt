@@ -1,0 +1,6 @@
+# Magen — robots policy
+User-agent: *
+Allow: /
+Disallow: /api/
+
+Sitemap: /sitemap.xml

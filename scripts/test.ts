@@ -104,5 +104,47 @@ await new Promise((r) => setTimeout(r, 400));
   ok("home footer links to privacy page", home.includes('href="/privacy.html"'));
 }
 
+// --- password strength module (pure, imported) ---
+{
+  const { estimateStrength, hasSequentialRun } = await import("../public/strength.js");
+  ok("empty password -> score 0", estimateStrength("").score === 0);
+  ok("common password -> score 0", estimateStrength("password").score === 0);
+  ok("repeated char -> score 0", estimateStrength("aaaaaaaaaaaa").score === 0);
+  ok("sequential+2classes -> score 0", estimateStrength("abcd1234").score === 0);
+  ok("long mixed -> score 4", estimateStrength("Xk9$mQ2!vLpW7#rT").score === 4);
+  ok("strong has non-empty label", estimateStrength("Xk9$mQ2!vLpW7#rT").label.length > 0);
+  ok("hasSequentialRun detects abcd", hasSequentialRun("abcd") === true);
+  ok("hasSequentialRun ignores acbd", hasSequentialRun("acbd") === false);
+}
+
+// --- strength.js served + index markup ---
+{
+  const r = await fetch(`${BASE}/strength.js`);
+  ok("strength.js served 200", r.status === 200, `status=${r.status}`);
+  ok("strength.js is javascript", (r.headers.get("content-type") ?? "").includes("javascript"));
+  const home = await (await fetch(`${BASE}/`)).text();
+  ok("home has strength meter markup", home.includes('id="pw-strength"'));
+}
+
+// --- SEO / security hygiene static files ---
+{
+  const robots = await fetch(`${BASE}/robots.txt`);
+  const robotsBody = await robots.text();
+  ok("robots.txt 200", robots.status === 200, `status=${robots.status}`);
+  ok("robots.txt text/plain", (robots.headers.get("content-type") ?? "").includes("text/plain"));
+  ok("robots.txt has sitemap", robotsBody.includes("Sitemap:"));
+
+  const sitemap = await fetch(`${BASE}/sitemap.xml`);
+  const sitemapBody = await sitemap.text();
+  ok("sitemap.xml 200", sitemap.status === 200, `status=${sitemap.status}`);
+  ok("sitemap.xml is xml", (sitemap.headers.get("content-type") ?? "").includes("xml"));
+  ok("sitemap.xml has urlset", sitemapBody.includes("<urlset"));
+
+  const sec = await fetch(`${BASE}/.well-known/security.txt`);
+  const secBody = await sec.text();
+  ok("security.txt 200", sec.status === 200, `status=${sec.status}`);
+  ok("security.txt has Contact", secBody.includes("Contact:"));
+}
+
 console.log(`\nRESULT: ${pass} passed, ${fail} failed`);
 process.exit(fail === 0 ? 0 : 1);

@@ -38,6 +38,16 @@
             </button>
           </div>
           <p id="pw-help" class="muted small">איננו שומרים, מתעדים או שולחים את הסיסמה המלאה לשום מקום.</p>
+
+          <div class="strength" id="pw-strength" hidden>
+            <div class="strength-track" role="progressbar" id="pw-strength-bar"
+                 aria-label="חוזק הסיסמה" aria-valuemin="0" aria-valuemax="4" aria-valuenow="0">
+              <span class="strength-fill" id="pw-strength-fill"></span>
+            </div>
+            <p class="strength-label small" id="pw-strength-label"></p>
+            <ul class="strength-tips small" id="pw-strength-tips"></ul>
+            <p class="muted small">הערכת חוזק מקומית בלבד (היוריסטיקה), אינה ערובה — היא משלימה את בדיקת הדליפה.</p>
+          </div>
         </div>
         <button type="submit" class="btn-primary" id="pw-submit">בדוק סיסמה</button>
       </form>

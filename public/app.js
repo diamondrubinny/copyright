@@ -1,3 +1,4 @@
+import { estimateStrength } from "/strength.js";
 // Magen frontend. Zero dependencies. Privacy-by-design:
 // the password is hashed locally and never leaves the browser in full.
 
@@ -28,11 +29,31 @@ function escapeHtml(s) {
     ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
 }
 
+function renderStrength(pw) {
+  const box = document.getElementById("pw-strength");
+  const bar = document.getElementById("pw-strength-bar");
+  const fill = document.getElementById("pw-strength-fill");
+  const label = document.getElementById("pw-strength-label");
+  const tipsEl = document.getElementById("pw-strength-tips");
+  if (!box || !bar || !fill || !label || !tipsEl) return;
+  if (!pw) { box.hidden = true; return; }
+  box.hidden = false;
+  const { score, label: text, tips } = estimateStrength(pw);
+  fill.style.width = `${(score / 4) * 100}%`;
+  bar.setAttribute("data-score", String(score));
+  bar.setAttribute("aria-valuenow", String(score));
+  bar.setAttribute("aria-valuetext", text);
+  label.textContent = `חוזק: ${text}`;
+  tipsEl.innerHTML = tips.map((t) => `<li>${escapeHtml(t)}</li>`).join("");
+}
+
 // --- Password check (k-anonymity) ---------------------------------------
 const pwForm = el("pw-form");
 const pwInput = el("pw-input");
 const pwResult = el("pw-result");
 const pwSubmit = el("pw-submit");
+
+pwInput.addEventListener("input", () => renderStrength(pwInput.value));
 
 el("pw-toggle").addEventListener("click", (e) => {
   const btn = e.currentTarget;
